@@ -1,0 +1,7 @@
+repositories {
+   maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile 'com.github.LogentriesCommunity:le_android:4.1.0'
+}
