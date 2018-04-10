@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The id must be unambiguous, reverse-domain format is used --> 
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-logentries" version="0.0.1">
+        
+    <!-- Name, description and other stuff-->
+    <name>Cordova LogEntries</name>
+    <description>cordova plugin for LogEntries</description>
+    <license>Apache 2.0</license>
+    <keywords>LogEntries</keywords>
+
+    <!-- Define the path to the common JavaScript interface -->
+    <js-module src="www/LogEntries.js" name="LogEntries">
+        <!-- indicates that the module.exports is inserted into the window object as window.customaction You can have as many <clobbers> as you like.-->
+        <clobbers target="LogEntries" />
+    </js-module>
+ 
+    <!-- The platform tag specifies a corresponding set of 
+    native code for the platform specifyed by the attribute name-->
+
+    <!-- ios -->
+    <platform name="ios">
+        <!-- The config-file tag encapsulates a feature tag that
+         is injected into the platform-specific config.xml -->
+         <config-file target="config.xml" parent="/*">
+            <feature name="LogEntries">
+                <param name="ios-package" value="LogEntries" />
+                <param name="onload" value="true" />
+            </feature>
+         </config-file>
+         <header-file src="src/ios/LogEntries.h" />
+         <source-file src="src/ios/LogEntries.m" />
+         <header-file src="src/ios/lelib/LEBackgroundThread.h" />
+         <source-file src="src/ios/lelib/LEBackgroundThread.m" />
+         <header-file src="src/ios/lelib/lecore.h" />
+         <source-file src="src/ios/lelib/lecore.m" />
+         <header-file src="src/ios/lelib/lelib.h" />
+         <source-file src="src/ios/lelib/lelib.m" />
+         <header-file src="src/ios/lelib/LELog.h" />
+         <source-file src="src/ios/lelib/LELog.m" />
+         <header-file src="src/ios/lelib/LeNetworkStatus.h" />
+         <source-file src="src/ios/lelib/LeNetworkStatus.m" />
+         <header-file src="src/ios/lelib/LogFile.h" />
+         <source-file src="src/ios/lelib/LogFile.m" />
+         <header-file src="src/ios/lelib/LogFiles.h" />
+         <source-file src="src/ios/lelib/LogFiles.m" />
+     </platform>
+
+     <!-- android -->
+     <platform name="android">
+        <!-- For Android, the platform-specific config.xml is usually copied in res/xml -->
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="LogEntries">
+                <param name="android-package" value="LogEntries"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <!-- If your plugin contains something that should be included 
+        in the main AndroidManifest.xml e.g.: YourActivity-->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+                    android:name="your.package.name.YourActivity"
+                    android:alwaysRetainTaskState="true"
+                    android:label="@string/smart_app_name"
+                    android:launchMode="singleTask"
+                    android:windowSoftInputMode="adjustResize">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW"/>
+                    <action android:name="android.intent.action.EDIT"/>
+                    <action android:name="android.intent.action.PICK"/>
+
+                    <category android:name="android.intent.category.BROWSABLE"/>
+                    <category android:name="android.intent.category.DEFAULT"/>
+
+                    <data android:mimeType="application/pdf"/>
+                </intent-filter>
+            </activity>
+        </config-file>
+        
+        <source-file src="src/android/LogEntries.java" target-dir="src/com/spoonconsulting/LogEntries"/>
+        <source-file src="src/android/YourActivity.java" target-dir="src/your/package/name"/>
+    </platform>  
+     
+</plugin>
