@@ -11,7 +11,7 @@ public class LogEntries extends CordovaPlugin {
     AndroidLogger logger;
 
     @Override
-    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         
         if (action.equals("init")) {
             try {
