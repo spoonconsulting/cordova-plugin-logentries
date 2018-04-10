@@ -35,7 +35,6 @@
          <header-file src="src/ios/lelib/lecore.h" />
          <source-file src="src/ios/lelib/lecore.m" />
          <header-file src="src/ios/lelib/lelib.h" />
-         <source-file src="src/ios/lelib/lelib.m" />
          <header-file src="src/ios/lelib/LELog.h" />
          <source-file src="src/ios/lelib/LELog.m" />
          <header-file src="src/ios/lelib/LeNetworkStatus.h" />
