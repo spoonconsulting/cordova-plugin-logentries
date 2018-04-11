@@ -5,18 +5,8 @@ Unofficial plugin for [LogEntries](https://logentries.com)
 
 ## Installation
 
-    $ cordova plugin add https://github.com/spoonconsulting/cordova-plugin-logentries.git
+    $ cordova plugin add https://github.com/spoonconsulting/cordova-plugin-logentries.git --variable LOG_ENTRIES_API_KEY="<api_key>"
 
-Modify or add what you need to create your custom plugin
-
-## Init plugin
-```javascript
-LogEntries.init('your token-here', function(){
-     console.log('initialised');
-},function(){
-    console.log('Error)';
-});
-```
 
 ## Log event
 ```javascript

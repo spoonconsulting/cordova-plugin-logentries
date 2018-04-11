@@ -9,30 +9,22 @@ import java.io.IOException;
 public class LogEntries extends CordovaPlugin {
 
     AndroidLogger logger;
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        Context context = this.cordova.getActivity();
+        packageName = context.getPackageName();
+        Resources resources = context.getResources();
+        
+        String token = context.getString(resources.getIdentifier("LOG_ENTRIES_API_KEY", "string", packageName));
+        logger = AndroidLogger.createInstance(this.cordova.getActivity().getApplicationContext(), false, false, false, null, 0, token, true);
+             
+        super.initialize(cordova, webView);
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         
-        if (action.equals("init")) {
-            try {
-                if (args.length() > 0){
-                    String token = args.get(0).toString();
-                    logger = AndroidLogger.createInstance(this.cordova.getActivity().getApplicationContext(), false, false, false, null, 0, token, true);
-                }else{
-                    PluginResult errorResult = new PluginResult(PluginResult.Status.ERROR, "Token not specified");
-                    errorResult.setKeepCallback(true);
-                    callbackContext.sendPluginResult(errorResult);
-                }
-               
-            } catch (IOException e) {
-                e.printStackTrace();
-                PluginResult errorResult = new PluginResult(PluginResult.Status.ERROR, e.getMessage());
-                errorResult.setKeepCallback(true);
-                callbackContext.sendPluginResult(errorResult);
-            }
-            return true;
-
-        }else if (action.equals("log")) {
+        if (action.equals("log")) {
             if (logger !=null){
                  if (args.length() > 0){
                     String msg = args.get(0).toString();

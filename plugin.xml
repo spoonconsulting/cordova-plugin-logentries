@@ -15,13 +15,8 @@
         <clobbers target="LogEntries" />
     </js-module>
  
-    <!-- The platform tag specifies a corresponding set of 
-    native code for the platform specifyed by the attribute name-->
-
-    <!-- ios -->
     <platform name="ios">
-        <!-- The config-file tag encapsulates a feature tag that
-         is injected into the platform-specific config.xml -->
+        <preference name="LOG_ENTRIES_API_KEY" />
          <config-file target="config.xml" parent="/*">
             <feature name="LogEntries">
                 <param name="ios-package" value="LogEntries" />
