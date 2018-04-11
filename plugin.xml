@@ -17,6 +17,9 @@
  
     <platform name="ios">
         <preference name="LOG_ENTRIES_API_KEY" />
+        <config-file target="*-Info.plist" parent="LOG_ENTRIES_API_KEY">
+            <string>$LOG_ENTRIES_API_KEY</string>
+        </config-file>
          <config-file target="config.xml" parent="/*">
             <feature name="LogEntries">
                 <param name="ios-package" value="LogEntries" />
@@ -42,6 +45,11 @@
 
      <!-- android -->
      <platform name="android">
+     <preference name="LOG_ENTRIES_API_KEY" />
+      <source-file src="src/android/res/values/le.xml" target-dir="res/values/" />
+        <config-file target="res/values/le.xml" parent="/*">
+            <string name="LOG_ENTRIES_API_KEY">$LOG_ENTRIES_API_KEY</string>
+        </config-file>
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="LogEntries">
                 <param name="android-package" value="LogEntries"/>
