@@ -22,7 +22,7 @@ public class LogEntries extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         Context context = this.cordova.getActivity();
-        packageName = context.getPackageName();
+        String packageName = context.getPackageName();
         Resources resources = context.getResources();
         
         String token = context.getString(resources.getIdentifier("LOG_ENTRIES_API_KEY", "string", packageName));
