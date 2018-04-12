@@ -11,6 +11,9 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
+import android.util.Log;
+import android.content.Context;
+import android.content.res.Resources;
 
 
 public class LogEntries extends CordovaPlugin {
