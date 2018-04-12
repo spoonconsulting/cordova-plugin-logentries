@@ -24,7 +24,7 @@ public class LogEntries extends CordovaPlugin {
         
         String token = context.getString(resources.getIdentifier("LOG_ENTRIES_API_KEY", "string", packageName));
         try {
-            logger = AndroidLogger.createInstance(this.cordova.getActivity().getApplicationContext(), false, false, false, null, 0, token, true);
+            logger = AndroidLogger.createInstance(this.cordova.getActivity().getApplicationContext(), false, false, false, null, 0, token, false);
         } catch (IOException e) {
             e.printStackTrace();
         }      
