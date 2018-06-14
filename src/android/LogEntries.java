@@ -3,7 +3,6 @@ package com.spoon.LogEntries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import com.logentries.logger.AndroidLogger;
-import java.io.IOException;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -11,6 +10,7 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 
 
 public class LogEntries extends CordovaPlugin {
@@ -21,37 +21,42 @@ public class LogEntries extends CordovaPlugin {
         Context context = this.cordova.getActivity();
         String packageName = context.getPackageName();
         Resources resources = context.getResources();
-        
+
         String token = context.getString(resources.getIdentifier("LOG_ENTRIES_API_KEY", "string", packageName));
         try {
-            logger = AndroidLogger.createInstance(this.cordova.getActivity().getApplicationContext(), false, false, false, null, 0, token, false);
+            logger = AndroidLogger.createInstance(this.cordova.getActivity().getApplicationContext(), false, false, false, null, 0, "69315b51-23bd-4c82-9a3c-5674b9c38783", false);
         } catch (Exception e) {
             e.printStackTrace();
-        }      
+        }
         super.initialize(cordova, webView);
     }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        
+
+
         if (action.equals("log")) {
             if (logger !=null){
                  if (args.length() > 0){
-                    String msg = args.get(0).toString();
-                    logger.log(msg);
+                    final String msg = args.get(0).toString();
+                     AsyncTask.execute(new Runnable() {
+                         @Override
+                         public void run() {
+                             logger.log(msg);
+                         }
+                     });
                 }else{
                     PluginResult errorResult = new PluginResult(PluginResult.Status.ERROR, "parameter not specified");
                     errorResult.setKeepCallback(true);
                     callbackContext.sendPluginResult(errorResult);
                 }
             }else{
-                PluginResult errorResult = new PluginResult(PluginResult.Status.ERROR,"Logger not initialised. Call init first");
+                PluginResult errorResult = new PluginResult(PluginResult.Status.ERROR,"Logger not initialised");
                 errorResult.setKeepCallback(true);
                 callbackContext.sendPluginResult(errorResult);
             }
              return true;
         }else {
-            
             return false;
         }
     }
